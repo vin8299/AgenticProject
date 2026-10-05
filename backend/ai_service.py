@@ -165,6 +165,6 @@ Customer:
         model=MODEL,
         max_tokens=1024,
         system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": prompt}]
+        messages=[{"role": "user"}]
     ) as stream:
         yield from stream.text_stream
