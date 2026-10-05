@@ -57,8 +57,8 @@ Important rules:
 
 def find_order_id(message):
 
-    match = re.search(
-        r"ORD-\d+",
+    match = re.match(
+        r"ORD-\d{3,6}",
         message.upper()
     )
 
@@ -136,7 +136,7 @@ Customer message:
     )
 
     answer = "\n".join(
-        block.text for block in response.content if block.type == "text"
+        block.text for block in response.content 
     )
 
     save_message(
@@ -165,6 +165,6 @@ Customer:
         model=MODEL,
         max_tokens=1024,
         system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": prompt}]
+        messages=[{"role": "user"}]
     ) as stream:
         yield from stream.text_stream
