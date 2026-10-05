@@ -136,7 +136,7 @@ Customer message:
     )
 
     answer = "\n".join(
-        block.text for block in response.content if block.type == "text"
+        block.text for block in response.content 
     )
 
     save_message(

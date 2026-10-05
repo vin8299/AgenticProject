@@ -45,7 +45,7 @@ def save_message(session_id, role, message):
         """
         INSERT INTO support_messages
         (session_id, role, message)
-        VALUES (%s, %s, %s)
+        VALUES (%s, %s, %s,%s)
         """,
         (session_id, role, message)
     )
