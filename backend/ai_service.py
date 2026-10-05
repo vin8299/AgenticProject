@@ -57,8 +57,8 @@ Important rules:
 
 def find_order_id(message):
 
-    match = re.search(
-        r"ORD-\d+",
+    match = re.match(
+        r"ORD-\d{3,6}",
         message.upper()
     )
 

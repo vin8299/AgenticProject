@@ -1,4 +1,6 @@
 import os
+from functools import lru_cache
+
 import mysql.connector
 from dotenv import load_dotenv
 
@@ -16,6 +18,8 @@ def get_connection():
     )
 
 
+# Order lookups are hot during a chat session; cache them to cut DB round trips.
+@lru_cache(maxsize=512)
 def get_order(order_id):
 
     conn = get_connection()
@@ -66,7 +70,7 @@ def get_history(session_id):
         """
         SELECT role, message
         FROM support_messages
-        WHERE session_id = %s
+        WHERE session_id LIKE %s
         ORDER BY created_at DESC
         LIMIT 10
         """,
